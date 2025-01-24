@@ -15,10 +15,10 @@ on:
         type: string
         description: "Enter Browser Name: "
         default: "chrome"
-#      xmlfilename:
-#        type: string
-#        description: "Enter XML filename: "
-#        default: "testng_maven.xml"
+  #      xmlfilename:
+  #        type: string
+  #        description: "Enter XML filename: "
+  #        default: "testng_maven.xml"
   push:
     branches: [ "master" ]
   pull_request:
@@ -42,10 +42,11 @@ jobs:
         #      The below run command will take the browser name and testng XML file name
         #       that were entered from the workflow_dispatch by the user and
         #       use them as arguments while running the mvn clean test
+        #
+        #               commenting this to avoid confusion
+        #          -Dsurefire.suiteXmlFiles=${{inputs.xmlfilename}}
         run: >
           mvn clean test
-#               commenting this to avoid confusion
-#          -Dsurefire.suiteXmlFiles=${{inputs.xmlfilename}}
           -Dmaven.test.failure.ignore=true
 
       #        Report Generation
