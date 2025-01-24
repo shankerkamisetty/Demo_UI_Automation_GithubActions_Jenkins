@@ -17,11 +17,6 @@ public class ProductsPageTests extends BaseTest {
         String password = "secret_sauce";
         loginPageObject = new LoginPageObject(driver);
         productsPageObject = loginPageObject.userLogin("performance_glitch_user", "secret_sauce");
-        try {
-            Thread.sleep(60000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         logger.info("Username is: " + username + "Password is: " + password);
         System.out.println(productsPageObject.getTitleOfPage());
         System.out.println(productsPageObject.getItemName());

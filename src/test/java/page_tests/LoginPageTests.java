@@ -17,11 +17,6 @@ public class LoginPageTests extends BaseTest {
         String password = "secret_sauce";
         loginPageObject = new LoginPageObject(driver);
         productsPageObject = loginPageObject.userLogin(username, password);
-        try {
-            Thread.sleep(60000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         logger.info("Username is: " + username + "Password is: " + password);
         System.out.println(productsPageObject.getTitleOfPage());
     }
