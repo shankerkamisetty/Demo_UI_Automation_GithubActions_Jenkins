@@ -1,4 +1,0 @@
-2025-01-24 16:41:13 [TestNG-tests-2] INFO  BaseTest:49 - Browser name is:chrome
-2025-01-24 16:41:13 [TestNG-tests-1] INFO  BaseTest:49 - Browser name is:chrome
-2025-01-24 16:42:20 [TestNG-tests-1] INFO  LoginPageTests:25 - Username is: standard_userPassword is: secret_sauce
-2025-01-24 16:43:34 [TestNG-tests-2] INFO  ProductsPageTests:25 - Username is: performance_glitch_userPassword is: secret_sauce
