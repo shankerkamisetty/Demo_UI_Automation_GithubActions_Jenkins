@@ -37,7 +37,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-      - name: Build using testng XML files
+      - name: Build and run tests using maven
 
         #      The below run command will take the browser name and testng XML file name
         #       that were entered from the workflow_dispatch by the user and
