@@ -85,8 +85,7 @@ public class BaseTest {
                 logger.error("Platform not supported!!");
             }
 
-        }
-        else if (browser.equalsIgnoreCase("firefox")) {
+        } else if (browser.equalsIgnoreCase("firefox")) {
             if (AppConstants.platform.equalsIgnoreCase("local")) {
                 WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();

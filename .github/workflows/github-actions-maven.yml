@@ -9,6 +9,15 @@
 name: Java CI with Maven for Test Automation Framework
 
 on:
+  workflow_dispatch:
+    inputs:
+      browsername:
+        type: string
+        description: "Enter Browser Name: "
+        default: "chrome"
+      xmlfilename:
+        type: string
+        description: "Enter XML filename: "
   push:
     branches: [ "master" ]
   pull_request:
@@ -20,15 +29,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: maven
-    - name: Build using testng XML files
-      run: mvn clean test
+      - uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      - name: Build using testng XML files
+
+        #      The below run command will take the browser name and testng XML file name
+        #       that were entered from the workflow_dispatch by the user and
+        #       use them as arguments while running the mvn clean test
+        run: >
+          mvn clean test
+          -Dsurefire.suiteXmlFiles=${{inputs.xmlfilename}}
+          -Dmaven.test.failure.ignore=true
+
+      #        Report Generation
+      - name: Archive report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HTMLReport
+          path: ./reports/*.html
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
 #    - name: Update dependency graph
