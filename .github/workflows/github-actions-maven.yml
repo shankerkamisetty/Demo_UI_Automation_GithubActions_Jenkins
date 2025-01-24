@@ -15,10 +15,10 @@ on:
         type: string
         description: "Enter Browser Name: "
         default: "chrome"
-      xmlfilename:
-        type: string
-        description: "Enter XML filename: "
-        default: "testng_maven.xml"
+#      xmlfilename:
+#        type: string
+#        description: "Enter XML filename: "
+#        default: "testng_maven.xml"
   push:
     branches: [ "master" ]
   pull_request:
@@ -44,7 +44,8 @@ jobs:
         #       use them as arguments while running the mvn clean test
         run: >
           mvn clean test
-          -Dsurefire.suiteXmlFiles=${{inputs.xmlfilename}}
+#               commenting this to avoid confusion
+#          -Dsurefire.suiteXmlFiles=${{inputs.xmlfilename}}
           -Dmaven.test.failure.ignore=true
 
       #        Report Generation
