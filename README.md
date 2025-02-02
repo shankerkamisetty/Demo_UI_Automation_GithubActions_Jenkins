@@ -3,6 +3,8 @@
 This is a simple project that demonstrates a dry run of selenium test scripts that are run on docker container. This
 project also demonstrates CI/CD process using GitHub Actions and Jenkins
 
+To run the tests use `mvn clean test`
+
 ## Docker Commands
 
 Lists all the containers that are up
