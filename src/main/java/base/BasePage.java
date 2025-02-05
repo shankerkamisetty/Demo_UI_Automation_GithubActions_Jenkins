@@ -15,6 +15,7 @@ public class BasePage {
         File f = ts.getScreenshotAs(OutputType.FILE);
         String filePath = "./screenshot/" + imageName;
         try {
+
             FileUtils.copyFile(f, new File((filePath)));
         } catch (IOException e) {
             throw new RuntimeException(e);

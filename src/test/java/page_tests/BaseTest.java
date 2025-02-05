@@ -8,7 +8,6 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.PageLoadStrategy;
@@ -45,26 +44,23 @@ public class BaseTest {
         } else {
             browser = AppConstants.browserName;
         }
-
         logger.info("Browser name is:" + browser);
 
         if (browser.equalsIgnoreCase("chrome")) {
             if (AppConstants.platform.equalsIgnoreCase("local")) {
                 co.addArguments("--headless");
-                WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver(co);
 
                 // for Selenium Grid
             } else if (AppConstants.platform.equalsIgnoreCase("remote")) {
                 co.setPlatformName("linux");
-//                co.addArguments("--headless");
                 co.setPageLoadStrategy(PageLoadStrategy.EAGER);
                 try {
                     //remote webdriver url for Selenium grid standalone browser
-//                    driver = new RemoteWebDriver(new URL("http://localhost:4441"), co);
+                    /*driver = new RemoteWebDriver(new URL("http://localhost:4441"), co);*/
 
                     //remote webdriver url for Selenium Grid
-//                    driver = new RemoteWebDriver(new URL("http://localhost:4444"), co);
+                    /*driver = new RemoteWebDriver(new URL("http://localhost:4444"), co);*/
 
                     // For Jenkins container to access the selenium-hub container,
                     //mention selenium-hub container name instead of localhost
@@ -80,7 +76,7 @@ public class BaseTest {
                 co.addArguments("--disable-gpu");
                 co.addArguments("--no-sandbox");
                 co.addArguments("--remote-allow-origins=*");
-                WebDriverManager.chromedriver().setup();
+
                 driver = new ChromeDriver(co);
             } else {
                 logger.error("Platform not supported!!");
@@ -88,18 +84,16 @@ public class BaseTest {
 
         } else if (browser.equalsIgnoreCase("firefox")) {
             if (AppConstants.platform.equalsIgnoreCase("local")) {
-                WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();
-                //driver = new FirefoxDriver(fo);
             } else if (AppConstants.platform.equalsIgnoreCase("remote")) {
                 fo.setPlatformName("linux");
                 fo.setPageLoadStrategy(PageLoadStrategy.EAGER);
                 try {
                     //remote webdriver url for Selenium standalone browser
-//                    driver = new RemoteWebDriver(new URL("http://localhost:4442"), fo);
+                    /*driver = new RemoteWebDriver(new URL("http://localhost:4442"), fo);*/
 
                     //remote webdriver url for Selenium Grid
-//                    driver = new RemoteWebDriver(new URL("http://localhost:4444"), fo);
+                    /*driver = new RemoteWebDriver(new URL("http://localhost:4444"), fo);*/
 
                     // For Jenkins container to access the selenium-hub container,
                     //mention selenium-hub container name instead of localhost
@@ -114,8 +108,6 @@ public class BaseTest {
                 fo.addArguments("--headless"); //for GitHub actions
                 fo.addArguments("--disable-gpu");
                 fo.addArguments("--no-sandbox");
-                //  fo.addArguments("--remote-allow-origins=*"); not required for GitHub actions execution flow
-                WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver(fo);
             } else {
                 logger.error("Platform not supported!!!");
@@ -138,7 +130,6 @@ public class BaseTest {
             String screenshot = BasePage.getScreenshot(iTestResult.getMethod().getMethodName() + ".jpg", driver);
             testLogger.get().fail(MediaEntityBuilder.createScreenCaptureFromBase64String(BasePage.convertImg_Base64(screenshot)).build());
         }
-
         testLogger.get().log(Status.INFO, "Driver End Time: " + LocalDateTime.now());
 
         driver.quit();
